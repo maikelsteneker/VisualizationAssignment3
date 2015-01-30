@@ -1,4 +1,6 @@
 #!/usr/bin/env python
+# Usage: ./songscript.py [sampsize]
+
 # usual imports
 import os
 import sys
