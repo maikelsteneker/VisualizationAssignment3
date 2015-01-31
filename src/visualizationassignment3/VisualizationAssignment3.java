@@ -1,6 +1,7 @@
 package visualizationassignment3;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -13,7 +14,7 @@ public class VisualizationAssignment3 {
      * @param args the command line arguments
      * @throws java.io.FileNotFoundException
      */
-    public static void main(String[] args) throws FileNotFoundException {
+    public static void main(String[] args) throws FileNotFoundException, IOException {
         List<Song> songs = ReadSongsFromJson.readSongsFromFile("songs.json");
         System.out.println(songs.size());
         System.out.println(songs.get(0));
