@@ -16,11 +16,11 @@ import org.jfree.ui.RefineryUtilities;
  *
  * @author Coen
  */
-public class PieChart_AWT extends ApplicationFrame {
+public class PieChart extends ApplicationFrame {
 
     static List<Song> songs = null;
     
-    public PieChart_AWT(String title) {
+    public PieChart(String title) {
         super(title);
         setContentPane(createDemoPanel());
 
@@ -54,13 +54,13 @@ public class PieChart_AWT extends ApplicationFrame {
     }
     
     public static JPanel createDemoPanel(List<Song> songs) {
-        PieChart_AWT.songs = songs;
+        PieChart.songs = songs;
         return createDemoPanel();
     }
 
     public static void main(String[] args) throws FileNotFoundException, IOException {
         songs = ReadSongsFromJson.readSongsFromFile("songs.json");
-        PieChart_AWT demo = new PieChart_AWT("Energy Levels");
+        PieChart demo = new PieChart("Energy Levels");
         demo.setSize(560, 367);
         RefineryUtilities.centerFrameOnScreen(demo);
         demo.setVisible(true);

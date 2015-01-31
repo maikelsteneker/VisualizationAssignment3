@@ -32,7 +32,7 @@ public class NewJFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = PieChart_AWT.createDemoPanel(songs);
+        jPanel1 = PieChart.createDemoPanel(songs);
         jScrollPane1 = new javax.swing.JScrollPane();
         jList1 = new javax.swing.JList();
 
