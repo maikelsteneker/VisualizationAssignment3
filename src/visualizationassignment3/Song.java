@@ -288,4 +288,9 @@ public class Song {
         return year;
     }
 
+    @Override
+    public String toString() {
+        return "Song{" + "artist_name=" + artist_name + ", title=" + title + '}';
+    }
+
 }
