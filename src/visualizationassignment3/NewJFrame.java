@@ -19,6 +19,7 @@ public class NewJFrame extends javax.swing.JFrame {
 
     /**
      * Creates new form NewJFrame
+     *
      * @param songs
      */
     public NewJFrame(List<Song> songs) {
@@ -102,6 +103,11 @@ public class NewJFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        if (panel.getChart() == DEFAULT_CHART) {
+            panel.setChart(PieChart.createChart());
+        } else {
+            panel.setChart(DEFAULT_CHART);
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
@@ -134,7 +140,7 @@ public class NewJFrame extends javax.swing.JFrame {
 
         /* Read data */
         final List<Song> songs = ReadSongsFromJson.readSongsFromFile("songs.json");
-        
+
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
