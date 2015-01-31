@@ -2,7 +2,6 @@ package visualizationassignment3;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JPanel;
 import org.jfree.chart.ChartFactory;
@@ -19,7 +18,7 @@ import org.jfree.ui.RefineryUtilities;
  */
 public class PieChart_AWT extends ApplicationFrame {
 
-    static List<Song> songs = new ArrayList<>();
+    static List<Song> songs = null;
     
     public PieChart_AWT(String title) {
         super(title);
@@ -50,6 +49,11 @@ public class PieChart_AWT extends ApplicationFrame {
     public static JPanel createDemoPanel() {
         JFreeChart chart = createChart(createDataset());
         return new ChartPanel(chart);
+    }
+    
+    public static JPanel createDemoPanel(List<Song> songs) {
+        PieChart_AWT.songs = songs;
+        return createDemoPanel();
     }
 
     public static void main(String[] args) throws FileNotFoundException, IOException {
