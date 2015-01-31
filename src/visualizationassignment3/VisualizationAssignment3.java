@@ -4,6 +4,8 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
 
+
+
 /**
  *
  * @author maikel
@@ -18,6 +20,8 @@ public class VisualizationAssignment3 {
         List<Song> songs = ReadSongsFromJson.readSongsFromFile("songs.json");
         System.out.println(songs.size());
         System.out.println(songs.get(0));
+
     }
+
 
 }
