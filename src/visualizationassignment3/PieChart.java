@@ -45,6 +45,10 @@ public class PieChart extends ApplicationFrame {
         );
         return chart;
     }
+    
+    public static JFreeChart createChart() {
+        return createChart(createDataset());
+    }
 
     public static JPanel createDemoPanel() {
         JFreeChart chart = createChart(createDataset());
