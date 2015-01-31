@@ -74,6 +74,7 @@ def retrieve_all_attributes(filename):
 #print l
 try: k = int(sys.argv[1])
 except IndexError: k = 10
+
 files = apply_to_all_files(msd_subset_data_path,func=lambda x:x)
 import random
 l = [retrieve_all_attributes(f) for f in random.sample(files, k)]
