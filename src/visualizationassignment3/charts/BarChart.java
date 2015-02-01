@@ -51,16 +51,6 @@ public class BarChart extends AbstractChart {
         return barChart;
     }
 
-    private String getTitle() {
-        String result = "";
-        for (String s : selectedValues) {
-            result += s;
-            result += " vs ";
-        }
-        result = result.substring(0, Math.max(result.length() - 4, 0));
-        return result;
-    }
-
     @Override
     public int getSelectionMode() {
         return javax.swing.ListSelectionModel.MULTIPLE_INTERVAL_SELECTION;

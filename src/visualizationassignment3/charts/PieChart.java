@@ -35,7 +35,7 @@ public class PieChart extends AbstractChart {
 
     private JFreeChart createChart(PieDataset dataset) {
         JFreeChart chart = ChartFactory.createPieChart(
-                "Energy Levels", // chart title
+                this.getTitle(), // chart title
                 dataset, // data
                 true, // include legend
                 true,

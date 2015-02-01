@@ -26,4 +26,14 @@ public abstract class AbstractChart {
 
     public abstract int getSelectionMode();
     
+    protected String getTitle() {
+        String result = "";
+        for (String s : selectedValues) {
+            result += s;
+            result += " vs ";
+        }
+        result = result.substring(0, Math.max(result.length() - 4, 0));
+        return result;
+    }
+    
 }
