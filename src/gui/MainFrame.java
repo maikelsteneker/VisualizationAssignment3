@@ -205,7 +205,7 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         final DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-        model.addRow(new Object[] {"", 0, 1});
+        model.addRow(new Object[] {"", null, null});
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
