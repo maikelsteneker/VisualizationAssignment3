@@ -11,7 +11,7 @@ import javax.swing.DefaultComboBoxModel;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
-import visualizationassignment3.charts.AbstractChart;
+import visualizationassignment3.charts.*;
 
 /**
  *
@@ -26,8 +26,9 @@ public class NewJFrame extends javax.swing.JFrame {
      */
     public NewJFrame(List<Song> songs) {
         charts = new AbstractChart[]{
-            new visualizationassignment3.charts.PieChart(songs),
-            new visualizationassignment3.charts.BarChart(songs)
+            new PieChart(songs),
+            new BarChart(songs),
+            new BubbleChart(songs)
         };
         initComponents();
         panel = (ChartPanel) jPanel1;

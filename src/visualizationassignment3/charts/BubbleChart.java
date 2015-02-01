@@ -16,8 +16,8 @@ public class BubbleChart extends AbstractChart {
 
     @Override
     public JFreeChart createChart() {
-        visualizationassignment3.BubbleChart.songs = this.songs;
-        return visualizationassignment3.BubbleChart.createChart();
+        visualizationassignment3.TempBubbleChart.songs = this.songs;
+        return visualizationassignment3.TempBubbleChart.createChart();
     }
 
     @Override

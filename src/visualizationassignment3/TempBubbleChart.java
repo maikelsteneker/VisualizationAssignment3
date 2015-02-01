@@ -21,11 +21,11 @@ import org.jfree.ui.RefineryUtilities;
  *
  * @author Coen
  */
-public class BubbleChart extends ApplicationFrame {
+public class TempBubbleChart extends ApplicationFrame {
 
     public static List<Song> songs = null;
 
-    public BubbleChart(String s) {
+    public TempBubbleChart(String s) {
         super(s);
         JPanel jpanel = createDemoPanel();
         jpanel.setPreferredSize(new Dimension(560, 370));
@@ -103,7 +103,7 @@ public class BubbleChart extends ApplicationFrame {
 
     public static void main(String args[]) throws IOException, FileNotFoundException {
         songs = ReadSongsFromJson.readSongsFromFile("songs.json");
-        BubbleChart bubblechart = new BubbleChart("Bubble Chart_frame");
+        TempBubbleChart bubblechart = new TempBubbleChart("Bubble Chart_frame");
         bubblechart.pack();
         RefineryUtilities.centerFrameOnScreen(bubblechart);
         bubblechart.setVisible(true);
