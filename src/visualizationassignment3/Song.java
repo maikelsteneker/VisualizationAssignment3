@@ -293,4 +293,15 @@ public class Song {
         return "Song{" + "artist_name=" + artist_name + ", title=" + title + '}';
     }
 
+    public Number getValue(String s) {
+        switch(s) {
+            case "duration":
+                return duration;
+            case "hotness":
+                return this.song_hotttnesss;
+            default:
+                throw new IllegalArgumentException("Unknown field " + s);
+        }
+    }
+
 }

@@ -7,10 +7,7 @@ package visualizationassignment3;
 
 import java.io.IOException;
 import java.util.List;
-import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
-import javax.swing.DefaultListModel;
-import javax.swing.ListModel;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
@@ -36,7 +33,8 @@ public class NewJFrame extends javax.swing.JFrame {
         initComponents();
         panel = (ChartPanel) jPanel1;
         PieChart.songs = songs;
-        panel.setChart(charts[0].createChart());
+        currentChart = (AbstractChart) jComboBox1.getSelectedItem();
+        panel.setChart(currentChart.createChart());
         panel.setMouseWheelEnabled(true);
         panel.setMouseZoomable(true, false);
         panel.setZoomInFactor(2.0);
@@ -62,7 +60,7 @@ public class NewJFrame extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 336, Short.MAX_VALUE)
+            .addGap(0, 299, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -70,9 +68,14 @@ public class NewJFrame extends javax.swing.JFrame {
         );
 
         jList1.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "sdf", "sdf" };
+            String[] strings = { "duration", "hotness" };
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
+        });
+        jList1.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                jList1ValueChanged(evt);
+            }
         });
         jScrollPane1.setViewportView(jList1);
 
@@ -116,9 +119,15 @@ public class NewJFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
-        final AbstractChart c = (AbstractChart) jComboBox1.getSelectedItem();
-        panel.setChart(c.createChart());
+        currentChart = (AbstractChart) jComboBox1.getSelectedItem();
+        panel.setChart(currentChart.createChart());
     }//GEN-LAST:event_jComboBox1ActionPerformed
+
+    private void jList1ValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jList1ValueChanged
+        List<String> selectedValues = jList1.getSelectedValuesList();
+        currentChart.setSelectedValues(selectedValues);
+        panel.setChart(currentChart.createChart());
+    }//GEN-LAST:event_jList1ValueChanged
 
     /**
      * @param args the command line arguments
@@ -164,6 +173,7 @@ public class NewJFrame extends javax.swing.JFrame {
     private final static JFreeChart DEFAULT_CHART // TODO: find appropriate value
             = ChartFactory.createBarChart(null, null, null, null);
     private final AbstractChart[] charts;
+    private AbstractChart currentChart;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox jComboBox1;
     private javax.swing.JList jList1;
