@@ -12,27 +12,23 @@ import model.Song;
  */
 public class FilteredList extends AbstractList<Song> {
 
+    final private List<Song> originalList;
     final private List<Song> filteredList;
+    final private List<Filter> filters;
 
-    public FilteredList(Iterable<Song> originalList, Filter... filters) {
+    public FilteredList(List<Song> originalList, Filter... filters) {
         this(originalList, new CompositeFilter(filters));
     }
 
-    public FilteredList(Iterable<Song> originalList, Filter filter) {
-        filteredList = new ArrayList<>();
-        applyFilters(originalList, filter);
+    public FilteredList(List<Song> originalList, Filter filter) {
+        this.originalList = originalList;
+        this.filteredList = new ArrayList<>(originalList);
+        this.filters = new ArrayList<>(1);
+        this.filters.add(filter);
+        applyFilters();
     }
 
-    private void applyFilters(Iterable<Song> originalList, Filter filter) {
-        for (Song s : originalList) {
-            if (filter.accept(s)) {
-                filteredList.add(s);
-            }
-        }
-    }
-
-    @Deprecated // TODO: test
-    public void addFilter(Filter filter) {
+    private void applyFilter(Filter filter) {
         for (Iterator<Song> it = filteredList.iterator(); it.hasNext();) {
             Song s = it.next();
             if (!filter.accept(s)) {
@@ -40,13 +36,46 @@ public class FilteredList extends AbstractList<Song> {
             }
         }
     }
-    
-    @Deprecated // TODO: test
-    public void addFilters(Filter... filters) {
-        addFilter(new CompositeFilter(filters));
+
+    private void applyFilters() {
+        applyFilter(new CompositeFilter(filters));
     }
 
-    public static FilteredList filter(Iterable<Song> originalList,
+    public void addFilter(Filter filter) {
+        filters.add(filter);
+        applyFilter(filter);
+    }
+
+    public boolean removeFilter(Filter filter) {
+        final int index = filters.indexOf(filter);
+        if (index != -1) {
+            removeFilter(index);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public Filter removeFilter(int index) {
+        final Filter result = filters.remove(index);
+        filteredList.clear();
+        filteredList.addAll(originalList);
+        applyFilters();
+        return result;
+    }
+
+    public void updateFilter(int index, String field, Number min, Number max) {
+        updateFilter(filters.get(index), field, min, max);
+    }
+
+    public void updateFilter(Filter filter, String field, Number min, Number max) {
+        //TODO: optimize
+        removeFilter(filter);
+        addFilter(new RangeFilter(field, min, max));
+    }
+
+    @Deprecated
+    public static FilteredList filter(List<Song> originalList,
             Filter... filters) {
         return new FilteredList(originalList, filters);
     }

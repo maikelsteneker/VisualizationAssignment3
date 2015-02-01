@@ -1,5 +1,6 @@
 package filtering;
 
+import java.util.List;
 import model.Song;
 
 /**
@@ -12,6 +13,10 @@ public class CompositeFilter extends Filter {
 
     public CompositeFilter(Filter... filters) {
         this.filters = filters;
+    }
+
+    public CompositeFilter(List<Filter> filters) {
+        this(filters.toArray(new Filter[0]));
     }
 
     @Override
