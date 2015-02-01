@@ -1,11 +1,11 @@
-package visualizationassignment3.charts;
+package charts;
 
 import java.util.List;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.JFreeChart;
 import org.jfree.data.general.DefaultPieDataset;
 import org.jfree.data.general.PieDataset;
-import visualizationassignment3.Song;
+import model.Song;
 
 /**
  *
@@ -35,7 +35,7 @@ public class PieChart extends AbstractChart {
 
     private JFreeChart createChart(PieDataset dataset) {
         JFreeChart chart = ChartFactory.createPieChart(
-                this.getTitle(), // chart title
+                this.getTitle(1), // chart title
                 dataset, // data
                 true, // include legend
                 true,

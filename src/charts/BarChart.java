@@ -1,4 +1,4 @@
-package visualizationassignment3.charts;
+package charts;
 
 import java.util.List;
 import org.jfree.chart.ChartFactory;
@@ -6,7 +6,7 @@ import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.category.DefaultCategoryDataset;
-import visualizationassignment3.Song;
+import model.Song;
 
 /**
  *

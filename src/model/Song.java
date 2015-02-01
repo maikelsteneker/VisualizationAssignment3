@@ -1,4 +1,4 @@
-package visualizationassignment3;
+package model;
 
 /**
  * Model for a song in the million song database.
