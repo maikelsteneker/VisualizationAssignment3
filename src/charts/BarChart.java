@@ -32,9 +32,10 @@ public class BarChart extends AbstractChart {
         final DefaultCategoryDataset dataset = new DefaultCategoryDataset();
 
         for (int i = 25; i < 50; i++) {
+            if (i < songs.size()) {
             for (String s : selectedValues) {
                 dataset.addValue(songs.get(i).getValue(s), songs.get(i).getTitle(), s);
-            }
+            }}
         }
 
         return dataset;
