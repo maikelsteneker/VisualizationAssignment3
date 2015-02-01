@@ -1,12 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package visualizationassignment3.charts;
 
 import java.util.List;
+import org.jfree.chart.ChartFactory;
 import org.jfree.chart.JFreeChart;
+import org.jfree.data.general.DefaultPieDataset;
+import org.jfree.data.general.PieDataset;
 import visualizationassignment3.Song;
 
 /**
@@ -21,8 +19,29 @@ public class PieChart extends AbstractChart {
 
     @Override
     public JFreeChart createChart() {
-        visualizationassignment3.PieChart.songs = this.songs;
-        return visualizationassignment3.PieChart.createChart();
+        return createChart(createDataset());
+    }
+
+    private PieDataset createDataset() {
+        DefaultPieDataset dataset = new DefaultPieDataset();
+        if (selectedValues.size() > 0) {
+            for (int i = 0; i < 20; i++) {
+                dataset.setValue(songs.get(i).getTitle(), songs.get(i).getValue(selectedValues.get(0)));
+            }
+        }
+
+        return dataset;
+    }
+
+    private JFreeChart createChart(PieDataset dataset) {
+        JFreeChart chart = ChartFactory.createPieChart(
+                "Energy Levels", // chart title
+                dataset, // data
+                true, // include legend
+                true,
+                false
+        );
+        return chart;
     }
 
     @Override
