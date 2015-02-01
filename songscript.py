@@ -56,8 +56,6 @@ def apply_to_all_files(basedir,func=lambda x: x,ext='.h5',limit=float('inf')):
                 return l
     return l
 
-
-filename = '/home/maikel/Downloads/MillionSongSubset/data/A/A/A/TRAAAAW128F429D538.h5'
 methods=[f for f in dir(GETTERS) if f.startswith('get_')]
 
 def retrieve_all_attributes(filename):
@@ -77,7 +75,14 @@ except IndexError: k = 10
 
 files = apply_to_all_files(msd_subset_data_path,func=lambda x:x)
 import random
-l = [retrieve_all_attributes(f) for f in random.sample(files, k)]
+sample = random.sample(files, 10000)
+from math import isnan
+all_ = (retrieve_all_attributes(f) for f in sample)
+preferential = (e for e in all_ if (not isnan(e['song_hotttnesss'])) and (not isnan(e['danceability'])))
+nonpreferential = (e for e in all_ if (isnan(e['song_hotttnesss'])) or (isnan(e['danceability'])))
+from itertools import chain
+combined = chain(preferential, nonpreferential)
+l = [combined.next() for i in xrange(k)]
 
 switch = 1
 
