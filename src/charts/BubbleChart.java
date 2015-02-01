@@ -60,7 +60,8 @@ public class BubbleChart extends AbstractChart {
         numberaxis1.setUpperMargin(0.9);
         xyitemrenderer.setSeriesToolTipGenerator(0, new XYToolTipGenerator() {
             public String generateToolTip(XYDataset xyzdataset, int series, int item) {
-                return songs.get(item).getTitle();
+                
+                return "Title: " + songs.get(item).getTitle() + "\n " + selectedValues.get(selectedValues.size() - 1) + ": " + songs.get(item).getSong_hotttnesss();
             }
         });
 
