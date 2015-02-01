@@ -67,7 +67,7 @@ public class NewJFrame extends javax.swing.JFrame {
         );
 
         jList1.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "duration", "hotness" };
+            String[] strings = { "duration", "tempo", "hotness" };
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
         });

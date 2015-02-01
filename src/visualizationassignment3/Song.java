@@ -293,14 +293,16 @@ public class Song {
         return "Song{" + "artist_name=" + artist_name + ", title=" + title + '}';
     }
 
-    public Number getValue(String s) {
-        switch(s) {
+    public Number getValue(String field) {
+        switch(field) {
             case "duration":
                 return duration;
             case "hotness":
                 return this.song_hotttnesss;
+            case "tempo":
+                return this.tempo;
             default:
-                throw new IllegalArgumentException("Unknown field " + s);
+                throw new IllegalArgumentException("Unknown field " + field);
         }
     }
 

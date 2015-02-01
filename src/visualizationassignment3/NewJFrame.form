@@ -85,9 +85,10 @@
         <Component class="javax.swing.JList" name="jList1">
           <Properties>
             <Property name="model" type="javax.swing.ListModel" editor="org.netbeans.modules.form.editors2.ListModelEditor">
-              <StringArray count="2">
+              <StringArray count="3">
                 <StringItem index="0" value="duration"/>
-                <StringItem index="1" value="hotness"/>
+                <StringItem index="1" value="tempo"/>
+                <StringItem index="2" value="hotness"/>
               </StringArray>
             </Property>
             <Property name="selectionMode" type="int" value="0"/>
