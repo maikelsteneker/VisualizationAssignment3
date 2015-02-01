@@ -19,11 +19,13 @@ import static visualizationassignment3.PieChart.songs;
  */
 public class BarChart extends ApplicationFrame {
 
-    static List<Song> songs = null;
+    public static List<Song> songs = null;
+    static String chartTitle;
 
     public BarChart(String appTitle, String chartTitle) {
 
         super(appTitle);
+        BarChart.chartTitle = chartTitle;
         JFreeChart barChart = ChartFactory.createBarChart(
                 chartTitle,
                 "Category",
@@ -37,7 +39,7 @@ public class BarChart extends ApplicationFrame {
         setContentPane(chartPanel);
     }
 
-    private CategoryDataset createDataset() {
+    private static CategoryDataset createDataset() {
         final DefaultCategoryDataset dataset = new DefaultCategoryDataset();
 
         for (int i = 25; i < 50; i++) {
@@ -46,6 +48,21 @@ public class BarChart extends ApplicationFrame {
         }
 
         return dataset;
+    }
+    
+    private static JFreeChart createChart(CategoryDataset dataset) {
+        JFreeChart barChart = ChartFactory.createBarChart(
+                chartTitle,
+                "Category",
+                "Score",
+                createDataset(),
+                PlotOrientation.VERTICAL,
+                true, true, false);
+        return barChart;
+    }
+    
+    public static JFreeChart createChart() {
+        return createChart(createDataset());
     }
 
     public static void main(String[] args) throws FileNotFoundException, IOException{
