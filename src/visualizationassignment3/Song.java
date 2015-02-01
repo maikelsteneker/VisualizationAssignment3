@@ -294,10 +294,13 @@ public class Song {
     }
 
     public Number getValue(String field) {
-        switch(field) {
+        switch (field) {
+            case "danceability":
+                return danceability;
             case "duration":
                 return duration;
             case "hotness":
+            case "hotttnesss":
                 return this.song_hotttnesss;
             case "tempo":
                 return this.tempo;
