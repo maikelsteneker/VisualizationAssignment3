@@ -89,7 +89,7 @@ public class MainFrame extends javax.swing.JFrame {
         );
 
         jList1.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "duration", "tempo", "hotness" };
+            String[] strings = { "duration", "tempo", "hotness", "loudness", "number of beats", "energy", "key" };
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
         });
@@ -229,7 +229,6 @@ public class MainFrame extends javax.swing.JFrame {
             
         switch (tme.getType()) {
             case TableModelEvent.INSERT:
-                System.out.println("insert");
                 try {
                     songs.addFilter(new RangeFilter(field, min, max));
                 } catch (IllegalArgumentException ex) {
@@ -237,7 +236,6 @@ public class MainFrame extends javax.swing.JFrame {
                 }
                 break;
             case TableModelEvent.UPDATE:
-                System.out.println("update");
                 try {
                     songs.updateFilter(row, field, min, max);
                 } catch (IllegalArgumentException ex) {
@@ -245,7 +243,6 @@ public class MainFrame extends javax.swing.JFrame {
                 }
                 break;
             case TableModelEvent.DELETE:
-                System.out.println("delete");
                 try {
                     songs.removeFilter(row);
                 } catch (IllegalArgumentException ex) {
