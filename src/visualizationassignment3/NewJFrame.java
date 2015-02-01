@@ -37,6 +37,9 @@ public class NewJFrame extends javax.swing.JFrame {
         panel = (ChartPanel) jPanel1;
         PieChart.songs = songs;
         panel.setChart(charts[0].createChart());
+        panel.setMouseWheelEnabled(true);
+        panel.setMouseZoomable(true, false);
+        panel.setZoomInFactor(2.0);
     }
 
     /**
