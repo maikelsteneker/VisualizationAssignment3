@@ -46,7 +46,7 @@ public class MainFrame extends javax.swing.JFrame {
         panels[0] = (ChartPanel) jPanel1;
         panels[1] = (ChartPanel) jPanel2;
         currentCharts[0] = (AbstractChart) jComboBox1.getSelectedItem();
-        currentCharts[1] = (AbstractChart) jComboBox1.getSelectedItem();
+        currentCharts[1] = (AbstractChart) jComboBox2.getSelectedItem();
         for (int i = 0; i < panels.length; i++) {
             final ChartPanel panel = panels[i];
             panel.setChart(currentCharts[i].createChart());
