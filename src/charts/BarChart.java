@@ -48,8 +48,9 @@ public class BarChart extends AbstractChart {
                 "Score",
                 createDataset(),
                 PlotOrientation.VERTICAL,
-                true, true, false);
+                false, true, false);
         return barChart;
+        
     }
 
     @Override

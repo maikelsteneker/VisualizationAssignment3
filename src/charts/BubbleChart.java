@@ -46,7 +46,7 @@ public class BubbleChart extends AbstractChart {
                 selectedValues.size() >= 1 ? selectedValues.get(0) : "",
                 xyzdataset,
                 PlotOrientation.HORIZONTAL,
-                true, true, false);
+                false, true, false);
 
         XYPlot xyplot = (XYPlot) jfreechart.getPlot();
         xyplot.setForegroundAlpha(0.65F);
