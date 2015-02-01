@@ -5,10 +5,12 @@ import java.util.List;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.axis.NumberAxis;
+import org.jfree.chart.labels.XYToolTipGenerator;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.renderer.xy.XYItemRenderer;
 import org.jfree.data.xy.DefaultXYZDataset;
+import org.jfree.data.xy.XYDataset;
 import org.jfree.data.xy.XYZDataset;
 import model.Song;
 
@@ -56,6 +58,11 @@ public class BubbleChart extends AbstractChart {
         NumberAxis numberaxis1 = (NumberAxis) xyplot.getRangeAxis();
         numberaxis1.setLowerMargin(0.8);
         numberaxis1.setUpperMargin(0.9);
+        xyitemrenderer.setSeriesToolTipGenerator(0, new XYToolTipGenerator() {
+            public String generateToolTip(XYDataset xyzdataset, int series, int item) {
+                return songs.get(item).getTitle();
+            }
+        });
 
         return jfreechart;
     }
