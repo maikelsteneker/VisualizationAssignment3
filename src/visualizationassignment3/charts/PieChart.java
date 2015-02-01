@@ -48,4 +48,9 @@ public class PieChart extends AbstractChart {
     public String toString() {
         return "PieChart";
     }
+
+    @Override
+    public int getSelectionMode() {
+        return javax.swing.ListSelectionModel.SINGLE_SELECTION;
+    }
 }

@@ -23,5 +23,7 @@ public abstract class AbstractChart {
     public void setSelectedValues(List<String> selectedValues) {
         this.selectedValues = selectedValues;
     }
+
+    public abstract int getSelectionMode();
     
 }

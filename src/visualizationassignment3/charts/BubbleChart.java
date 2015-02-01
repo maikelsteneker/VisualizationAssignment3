@@ -22,6 +22,11 @@ public class BubbleChart extends AbstractChart {
 
     @Override
     public String toString() {
-        return "PieChart";
+        return "BubbleChart";
+    }
+    
+    @Override
+    public int getSelectionMode() {
+        return javax.swing.ListSelectionModel.MULTIPLE_INTERVAL_SELECTION;
     }
 }

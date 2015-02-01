@@ -60,4 +60,9 @@ public class BarChart extends AbstractChart {
         result = result.substring(0, Math.max(result.length() - 4, 0));
         return result;
     }
+
+    @Override
+    public int getSelectionMode() {
+        return javax.swing.ListSelectionModel.MULTIPLE_INTERVAL_SELECTION;
+    }
 }

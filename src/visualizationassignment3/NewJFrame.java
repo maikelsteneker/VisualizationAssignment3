@@ -25,7 +25,6 @@ public class NewJFrame extends javax.swing.JFrame {
      * @param songs
      */
     public NewJFrame(List<Song> songs) {
-        this.songs = songs;
         charts = new AbstractChart[]{
             new visualizationassignment3.charts.PieChart(songs),
             new visualizationassignment3.charts.BarChart(songs)
@@ -71,6 +70,7 @@ public class NewJFrame extends javax.swing.JFrame {
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
         });
+        jList1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jList1.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
             public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
                 jList1ValueChanged(evt);
@@ -126,6 +126,7 @@ public class NewJFrame extends javax.swing.JFrame {
         List<String> selectedValues = jList1.getSelectedValuesList();
         currentChart.setSelectedValues(selectedValues);
         panel.setChart(currentChart.createChart());
+        jList1.setSelectionMode(currentChart.getSelectionMode());
     }//GEN-LAST:event_jList1ValueChanged
 
     /**
@@ -167,7 +168,6 @@ public class NewJFrame extends javax.swing.JFrame {
         });
     }
 
-    private final List<Song> songs;
     private final ChartPanel panel;
     private final static JFreeChart DEFAULT_CHART // TODO: find appropriate value
             = ChartFactory.createBarChart(null, null, null, null);
