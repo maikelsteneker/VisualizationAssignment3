@@ -1,5 +1,11 @@
-package visualizationassignment3;
+package gui;
 
+import io.ReadSongsFromJson;
+import charts.AbstractChart;
+import charts.PieChart;
+import charts.BarChart;
+import charts.BubbleChart;
+import model.Song;
 import java.io.IOException;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
@@ -7,7 +13,6 @@ import javax.swing.JOptionPane;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
-import visualizationassignment3.charts.*;
 
 /**
  *

@@ -1,9 +1,9 @@
-package visualizationassignment3.charts;
+package charts;
 
 import java.util.ArrayList;
 import java.util.List;
 import org.jfree.chart.JFreeChart;
-import visualizationassignment3.Song;
+import model.Song;
 
 /**
  *

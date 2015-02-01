@@ -1,5 +1,6 @@
-package visualizationassignment3;
+package io;
 
+import model.Song;
 import com.google.gson.Gson;
 import com.google.gson.stream.JsonReader;
 import java.io.ByteArrayInputStream;

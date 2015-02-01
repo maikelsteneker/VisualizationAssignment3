@@ -1,4 +1,4 @@
-package visualizationassignment3.charts;
+package charts;
 
 import java.awt.Color;
 import java.util.List;
@@ -10,7 +10,7 @@ import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.renderer.xy.XYItemRenderer;
 import org.jfree.data.xy.DefaultXYZDataset;
 import org.jfree.data.xy.XYZDataset;
-import visualizationassignment3.Song;
+import model.Song;
 
 /**
  *
