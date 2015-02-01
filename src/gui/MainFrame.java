@@ -205,7 +205,7 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         final DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-        model.addRow(new Object[] {"", null, null});
+        model.addRow(new Object[]{"", null, null});
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -216,7 +216,7 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void tableChanged(TableModelEvent tme) {
         for (int row = tme.getFirstRow(); row <= tme.getLastRow(); row++) {
-            
+
             final String field = (tme.getType() != TableModelEvent.DELETE)
                     ? (String) jTable1.getModel().getValueAt(row, 0)
                     : "";
@@ -226,33 +226,34 @@ public class MainFrame extends javax.swing.JFrame {
             final Number max = (tme.getType() != TableModelEvent.DELETE)
                     ? (Number) jTable1.getModel().getValueAt(row, 2)
                     : 0;
-            
-        switch (tme.getType()) {
-            case TableModelEvent.INSERT:
-                try {
-                    songs.addFilter(new RangeFilter(field, min, max));
-                } catch (IllegalArgumentException ex) {
-                    // TODO: handle invalid input
-                }
-                break;
-            case TableModelEvent.UPDATE:
-                try {
-                    songs.updateFilter(row, field, min, max);
-                } catch (IllegalArgumentException ex) {
-                    // TODO: handle invalid input
-                }
-                break;
-            case TableModelEvent.DELETE:
-                try {
-                    songs.removeFilter(row);
-                } catch (IllegalArgumentException ex) {
-                    // TODO: handle invalid input
-                }
-                break;
-        }}
+
+            switch (tme.getType()) {
+                case TableModelEvent.INSERT:
+                    try {
+                        songs.addFilter(new RangeFilter(field, min, max));
+                    } catch (IllegalArgumentException ex) {
+                        // TODO: handle invalid input
+                    }
+                    break;
+                case TableModelEvent.UPDATE:
+                    try {
+                        songs.updateFilter(row, field, min, max);
+                    } catch (IllegalArgumentException ex) {
+                        // TODO: handle invalid input
+                    }
+                    break;
+                case TableModelEvent.DELETE:
+                    try {
+                        songs.removeFilter(row);
+                    } catch (IllegalArgumentException ex) {
+                        // TODO: handle invalid input
+                    }
+                    break;
+            }
+        }
         panel.setChart(currentChart.createChart());
     }
-    
+
     /**
      * @param args the command line arguments
      */
@@ -286,8 +287,8 @@ public class MainFrame extends javax.swing.JFrame {
         try {
             songs = ReadSongsFromJson.readSongsFromFile("songs.json");
         } catch (IOException ex) {
-             JOptionPane.showMessageDialog(null, "Error while reading songs.json; is it missing or empty?", "Error", JOptionPane.ERROR_MESSAGE);
-             return;
+            JOptionPane.showMessageDialog(null, "Error while reading songs.json; is it missing or empty?", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
         }
 
         /* Create and display the form */
