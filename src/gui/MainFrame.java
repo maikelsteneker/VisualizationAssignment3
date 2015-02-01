@@ -178,7 +178,7 @@ public class MainFrame extends javax.swing.JFrame {
         );
 
         jList2.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "duration", "tempo", "hotness", "loudness", "number of beats", "energy", "key" };
+            String[] strings = { "duration", "tempo", "hotness", "loudness", "number of beats","key" };
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
         });
@@ -211,7 +211,7 @@ public class MainFrame extends javax.swing.JFrame {
         );
 
         jList3.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "duration", "tempo", "hotness", "loudness", "number of beats", "energy", "key" };
+            String[] strings = { "duration", "tempo", "hotness", "loudness", "number of beats","key" };
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
         });
@@ -244,7 +244,7 @@ public class MainFrame extends javax.swing.JFrame {
         );
 
         jList4.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "duration", "tempo", "hotness", "loudness", "number of beats", "energy", "key" };
+            String[] strings = { "duration", "tempo", "hotness", "loudness", "number of beats", "key" };
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
         });
@@ -543,7 +543,7 @@ public class MainFrame extends javax.swing.JFrame {
     private final AbstractChart[][] charts;
     private final AbstractChart[] currentCharts = new AbstractChart[N_CHARTS];
     private final FilteredList songs;
-    private final static String[] FIELDS = {"duration", "tempo", "hotness", "loudness", "number of beats", "energy", "key"};
+    private final static String[] FIELDS = {"duration", "tempo", "hotness", "loudness", "number of beats", "key"};
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
