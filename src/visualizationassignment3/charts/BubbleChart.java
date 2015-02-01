@@ -1,7 +1,6 @@
 package visualizationassignment3.charts;
 
 import java.awt.Color;
-import java.util.ArrayList;
 import java.util.List;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.JFreeChart;
@@ -40,7 +39,7 @@ public class BubbleChart extends AbstractChart {
 
     private JFreeChart createChart(XYZDataset xyzdataset) {
         JFreeChart jfreechart = ChartFactory.createBubbleChart(
-                this.getTitle(),
+                this.getTitle(3),
                 selectedValues.size() >= 2 ? selectedValues.get(1) : "",
                 selectedValues.size() >= 1 ? selectedValues.get(0) : "",
                 xyzdataset,
