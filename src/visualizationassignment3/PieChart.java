@@ -54,6 +54,7 @@ public class PieChart extends ApplicationFrame {
         JFreeChart chart = createChart(createDataset());
         ChartPanel panel = new ChartPanel(chart);
         panel.setMouseWheelEnabled(true);
+        panel.setMouseZoomable(true, false);
         return panel;
     }
     
@@ -68,6 +69,7 @@ public class PieChart extends ApplicationFrame {
         demo.setSize(560, 367);
         RefineryUtilities.centerFrameOnScreen(demo);
         demo.setVisible(true);
+        
     }
 
 }
