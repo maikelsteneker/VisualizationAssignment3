@@ -7,7 +7,10 @@ package visualizationassignment3;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
@@ -133,9 +136,8 @@ public class NewJFrame extends javax.swing.JFrame {
 
     /**
      * @param args the command line arguments
-     * @throws java.io.IOException
      */
-    public static void main(String args[]) throws IOException {
+    public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -160,7 +162,13 @@ public class NewJFrame extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Read data */
-        final List<Song> songs = ReadSongsFromJson.readSongsFromFile("songs.json");
+        final List<Song> songs;
+        try {
+            songs = ReadSongsFromJson.readSongsFromFile("songs.json");
+        } catch (IOException ex) {
+             JOptionPane.showMessageDialog(null, "Error while reading songs.json; is it missing or empty?", "Error", JOptionPane.ERROR_MESSAGE);
+             return;
+        }
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
