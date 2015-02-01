@@ -32,7 +32,6 @@ public class NewJFrame extends javax.swing.JFrame {
         };
         initComponents();
         panel = (ChartPanel) jPanel1;
-        PieChart.songs = songs;
         currentChart = (AbstractChart) jComboBox1.getSelectedItem();
         panel.setChart(currentChart.createChart());
         panel.setMouseWheelEnabled(true);
