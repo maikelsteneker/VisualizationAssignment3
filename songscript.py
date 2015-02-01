@@ -78,8 +78,11 @@ import random
 sample = random.sample(files, 10000)
 from math import isnan
 all_ = (retrieve_all_attributes(f) for f in sample)
-preferential = (e for e in all_ if (not isnan(e['song_hotttnesss'])) and (not isnan(e['danceability'])))
-nonpreferential = (e for e in all_ if (isnan(e['song_hotttnesss'])) or (isnan(e['danceability'])))
+preferential = (e for e in all_ if not isnan(e['song_hotttnesss']))# and (not isnan(e['danceability'])))
+#temp = [preferential.next() for i in xrange(k)]
+#for e in temp: print '%s, %s' % (e['song_hotttnesss'], e['danceability'])
+all_ = (retrieve_all_attributes(f) for f in sample)
+nonpreferential = (e for e in all_ if isnan(e['song_hotttnesss']))# or (isnan(e['danceability'])))
 from itertools import chain
 combined = chain(preferential, nonpreferential)
 l = [combined.next() for i in xrange(k)]
