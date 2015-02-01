@@ -198,6 +198,9 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void jList1ValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jList1ValueChanged
         List<String> selectedValues = jList1.getSelectedValuesList();
+        if (selectedValues.size() > 3) {
+            selectedValues.remove(0);
+        }
         currentChart.setSelectedValues(selectedValues);
         panel.setChart(currentChart.createChart());
         jList1.setSelectionMode(currentChart.getSelectionMode());
@@ -214,7 +217,7 @@ public class MainFrame extends javax.swing.JFrame {
             final DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
             model.removeRow(selectedRow);
         } else {
-JOptionPane.showMessageDialog(null, "Please select a filter to remove", "Select a filter", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Please select a filter to remove", "Select a filter", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
