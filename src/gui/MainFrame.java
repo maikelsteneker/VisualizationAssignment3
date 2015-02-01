@@ -210,8 +210,12 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         final int selectedRow = jTable1.getSelectedRow();
-        final DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-        model.removeRow(selectedRow);
+        if (selectedRow != -1) {
+            final DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+            model.removeRow(selectedRow);
+        } else {
+JOptionPane.showMessageDialog(null, "Please select a filter to remove", "Select a filter", JOptionPane.WARNING_MESSAGE);
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void tableChanged(TableModelEvent tme) {
