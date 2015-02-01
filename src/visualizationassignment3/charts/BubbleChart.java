@@ -32,17 +32,17 @@ public class BubbleChart extends AbstractChart {
     public String toString() {
         return "BubbleChart";
     }
-    
+
     @Override
     public int getSelectionMode() {
         return javax.swing.ListSelectionModel.MULTIPLE_INTERVAL_SELECTION;
     }
-    
+
     private JFreeChart createChart(XYZDataset xyzdataset) {
         JFreeChart jfreechart = ChartFactory.createBubbleChart(
-                "Duration vs Tempo vs Hotttnesss",
-                "Tempo",
-                "Duration",
+                this.getTitle(),
+                selectedValues.size() >= 2 ? selectedValues.get(1) : "",
+                selectedValues.size() >= 1 ? selectedValues.get(0) : "",
                 xyzdataset,
                 PlotOrientation.HORIZONTAL,
                 true, true, false);
@@ -61,35 +61,17 @@ public class BubbleChart extends AbstractChart {
         return jfreechart;
     }
 
-    
-
     public XYZDataset createDataset() {
-        DefaultXYZDataset defaultxyzdataset = new DefaultXYZDataset();
-
-        ArrayList<Double> values1 = new ArrayList<>();
-        ArrayList<Double> values2 = new ArrayList<>();
-        ArrayList<Double> values3 = new ArrayList<>();
-        for (int i = 0; i < songs.size(); i++) {
-            Song s = songs.get(i);
-            if (s.getSong_hotttnesss() > 0) {
-                values1.add(s.getDuration());
-                values2.add(s.getTempo());
-                values3.add(s.getSong_hotttnesss() * 100);
-
+        DefaultXYZDataset result = new DefaultXYZDataset();
+        if (selectedValues.size() >= 3) {
+            double[][] values = new double[3][songs.size()];
+            for (int i = 0; i < 3; i++) {
+                for (int j = 0; j < songs.size(); j++) {
+                    values[i][j] = songs.get(j).getValue(selectedValues.get(i)).doubleValue();
+                }
             }
+            result.addSeries("Series 1", values);
         }
-
-        double values4[] = new double[values1.size()];
-        double values5[] = new double[values2.size()];
-        double values6[] = new double[values3.size()];
-        for (int i = 0; i < values1.size(); i++) {
-            values4[i] = values1.get(i);
-            values5[i] = values2.get(i);
-            values6[i] = values3.get(i);
-        }
-        double values7[][] = {values4, values5, values6};
-        defaultxyzdataset.addSeries("Series 1", values7);
-
-        return defaultxyzdataset;
+        return result;
     }
 }
