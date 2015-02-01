@@ -304,6 +304,14 @@ public class Song {
                 return this.song_hotttnesss;
             case "tempo":
                 return this.tempo;
+            case "loudness":
+                return this.loudness * -1;
+            case "number of beats":
+                return this.beats_start.length;
+            case "key":
+                return this.key;
+            case "energy":
+                return this.energy;
             default:
                 throw new IllegalArgumentException("Unknown field " + field);
         }
