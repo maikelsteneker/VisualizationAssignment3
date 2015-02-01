@@ -18,7 +18,7 @@ import org.jfree.ui.RefineryUtilities;
  */
 public class PieChart extends ApplicationFrame {
 
-    static List<Song> songs = null;
+    public static List<Song> songs = null;
     
     public PieChart(String title) {
         super(title);
