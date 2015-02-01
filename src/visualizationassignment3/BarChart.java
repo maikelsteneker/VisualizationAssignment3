@@ -36,6 +36,9 @@ public class BarChart extends ApplicationFrame {
 
         ChartPanel chartPanel = new ChartPanel(barChart);
         chartPanel.setPreferredSize(new java.awt.Dimension(560, 367));
+        chartPanel.setMouseWheelEnabled(true);
+        chartPanel.setMouseZoomable(true,false);
+        chartPanel.setZoomInFactor(2.0);
         setContentPane(chartPanel);
     }
 
