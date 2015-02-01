@@ -10,15 +10,13 @@ import filtering.RangeFilter;
 import model.Song;
 import java.io.IOException;
 import java.util.List;
-import javax.swing.DefaultCellEditor;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
+import javax.swing.JList;
 import javax.swing.JOptionPane;
-import javax.swing.JTextField;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
@@ -36,18 +34,26 @@ public class MainFrame extends javax.swing.JFrame {
      */
     public MainFrame(List<Song> songs) {
         this.songs = new FilteredList(songs);
-        charts = new AbstractChart[]{
-            new PieChart(this.songs),
-            new BarChart(this.songs),
-            new BubbleChart(this.songs)
-        };
+        charts = new AbstractChart[N_CHARTS][];
+        for (int i = 0; i < charts.length; i++) {
+            charts[i] = new AbstractChart[]{
+                new PieChart(this.songs),
+                new BarChart(this.songs),
+                new BubbleChart(this.songs)
+            };
+        }
         initComponents();
-        panel = (ChartPanel) jPanel1;
-        currentChart = (AbstractChart) jComboBox1.getSelectedItem();
-        panel.setChart(currentChart.createChart());
-        panel.setMouseWheelEnabled(true);
-        panel.setMouseZoomable(true, false);
-        panel.setZoomInFactor(2.0);
+        panels[0] = (ChartPanel) jPanel1;
+        panels[1] = (ChartPanel) jPanel2;
+        currentCharts[0] = (AbstractChart) jComboBox1.getSelectedItem();
+        currentCharts[1] = (AbstractChart) jComboBox1.getSelectedItem();
+        for (int i = 0; i < panels.length; i++) {
+            final ChartPanel panel = panels[i];
+            panel.setChart(currentCharts[i].createChart());
+            panel.setMouseWheelEnabled(true);
+            panel.setMouseZoomable(true, false);
+            panel.setZoomInFactor(2.0);
+        }
         jTable1.getModel().addTableModelListener(new TableModelListener() {
 
             @Override
@@ -74,6 +80,10 @@ public class MainFrame extends javax.swing.JFrame {
         jTable1 = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        jPanel2 = new ChartPanel(DEFAULT_CHART);
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jList2 = new javax.swing.JList();
+        jComboBox2 = new javax.swing.JComboBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -81,7 +91,7 @@ public class MainFrame extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 573, Short.MAX_VALUE)
+            .addGap(0, 442, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -89,7 +99,7 @@ public class MainFrame extends javax.swing.JFrame {
         );
 
         jList1.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "duration", "tempo", "hotness", "loudness", "number of beats", "energy", "key" };
+            final String[] strings = FIELDS;
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
         });
@@ -101,7 +111,7 @@ public class MainFrame extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(jList1);
 
-        jComboBox1.setModel(new DefaultComboBoxModel<>(charts));
+        jComboBox1.setModel(new DefaultComboBoxModel<>(charts[0]));
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBox1ActionPerformed(evt);
@@ -124,13 +134,6 @@ public class MainFrame extends javax.swing.JFrame {
                 return types [columnIndex];
             }
         });
-        JComboBox comboBox = new JComboBox();
-        comboBox.addItem("Snowboarding");
-        comboBox.addItem("Rowing");
-        comboBox.addItem("Chasing toddlers");
-        comboBox.addItem("Speed reading");
-        comboBox.addItem("Teaching high school");
-        comboBox.addItem("None");
         jScrollPane2.setViewportView(jTable1);
 
         jButton1.setText("+ Add filter");
@@ -144,6 +147,37 @@ public class MainFrame extends javax.swing.JFrame {
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 442, Short.MAX_VALUE)
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+
+        jList2.setModel(new javax.swing.AbstractListModel() {
+            String[] strings = { "duration", "tempo", "hotness", "loudness", "number of beats", "energy", "key" };
+            public int getSize() { return strings.length; }
+            public Object getElementAt(int i) { return strings[i]; }
+        });
+        jList2.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jList2.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                jList2ValueChanged(evt);
+            }
+        });
+        jScrollPane3.setViewportView(jList2);
+
+        jComboBox2.setModel(new DefaultComboBoxModel<>(charts[1]));
+        jComboBox2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox2ActionPerformed(evt);
             }
         });
 
@@ -161,12 +195,19 @@ public class MainFrame extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 426, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jButton1)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jButton2)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -177,30 +218,43 @@ public class MainFrame extends javax.swing.JFrame {
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jScrollPane1))
                 .addGap(18, 18, 18)
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jButton2))
-                .addContainerGap(191, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(204, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
-        currentChart = (AbstractChart) jComboBox1.getSelectedItem();
+        final JComboBox jComboBox = jComboBox1;
+        currentCharts[0] = (AbstractChart) jComboBox.getSelectedItem();
         jList1ValueChanged(null);
-        panel.setChart(currentChart.createChart());
+        jList2ValueChanged(null);
+        for (int i = 0; i < panels.length; i++) {
+            panels[i].setChart(currentCharts[i].createChart());
+        }
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
     private void jList1ValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jList1ValueChanged
-        List<String> selectedValues = jList1.getSelectedValuesList();
-        currentChart.setSelectedValues(selectedValues);
-        panel.setChart(currentChart.createChart());
-        jList1.setSelectionMode(currentChart.getSelectionMode());
+        final JList jList = this.jList1;
+        List<String> selectedValues = jList.getSelectedValuesList();
+        currentCharts[0].setSelectedValues(selectedValues);
+        for (int i = 0; i < panels.length; i++) {
+            panels[i].setChart(currentCharts[i].createChart());
+        }
+        jList.setSelectionMode(currentCharts[0].getSelectionMode());
     }//GEN-LAST:event_jList1ValueChanged
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -214,9 +268,29 @@ public class MainFrame extends javax.swing.JFrame {
             final DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
             model.removeRow(selectedRow);
         } else {
-JOptionPane.showMessageDialog(null, "Please select a filter to remove", "Select a filter", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Please select a filter to remove", "Select a filter", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jList2ValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jList2ValueChanged
+        final JList jList = this.jList2;
+        List<String> selectedValues = jList.getSelectedValuesList();
+        currentCharts[1].setSelectedValues(selectedValues);
+        for (int i = 0; i < panels.length; i++) {
+            panels[i].setChart(currentCharts[i].createChart());
+        }
+        jList.setSelectionMode(currentCharts[1].getSelectionMode());
+    }//GEN-LAST:event_jList2ValueChanged
+
+    private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
+        final JComboBox jComboBox = jComboBox2;
+        currentCharts[1] = (AbstractChart) jComboBox.getSelectedItem();
+        jList1ValueChanged(null);
+        jList2ValueChanged(null);
+        for (int i = 0; i < panels.length; i++) {
+            panels[i].setChart(currentCharts[i].createChart());
+        }
+    }//GEN-LAST:event_jComboBox2ActionPerformed
 
     private void tableChanged(TableModelEvent tme) {
         for (int row = tme.getFirstRow(); row <= tme.getLastRow(); row++) {
@@ -255,7 +329,9 @@ JOptionPane.showMessageDialog(null, "Please select a filter to remove", "Select 
                     break;
             }
         }
-        panel.setChart(currentChart.createChart());
+        for (int i = 0; i < panels.length; i++) {
+            panels[i].setChart(currentCharts[i].createChart());
+        }
     }
 
     /**
@@ -303,20 +379,26 @@ JOptionPane.showMessageDialog(null, "Please select a filter to remove", "Select 
         });
     }
 
-    private final ChartPanel panel;
+    private final static int N_CHARTS = 2;
+    private final ChartPanel[] panels = new ChartPanel[N_CHARTS];
     private final static JFreeChart DEFAULT_CHART // TODO: find appropriate value
             = ChartFactory.createBarChart(null, null, null, null);
-    private final AbstractChart[] charts;
-    private AbstractChart currentChart;
+    private final AbstractChart[][] charts;
+    private final AbstractChart[] currentCharts = new AbstractChart[N_CHARTS];
     private final FilteredList songs;
+    private final static String[] FIELDS = { "duration", "tempo", "hotness", "loudness", "number of beats", "energy", "key" };
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JComboBox jComboBox1;
+    private javax.swing.JComboBox jComboBox2;
     private javax.swing.JList jList1;
+    private javax.swing.JList jList2;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
 }
